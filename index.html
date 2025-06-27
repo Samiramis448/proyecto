@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Composta Viva</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    
+    :root {
+      --verde-principal: #a7e39f;
+      --verde-claro: #d8f3dc;
+      --blanco: #ffffff;
+      --gris: #f0f0f0;
+      --negro: #2e2e2e;
+      --marron: #6B4F3B;
+    }
+    h1{
+        color: #7c6454;
+    }
+
+    body {
+       background-image: url('fondo3.jpeg');
+       background-size: cover;
+       background-repeat: no-repeat ;
+       margin:0 ;
+       padding: 0%;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--gris);
+      color: var(--negro);
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4 {
+      font-weight: 600;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+    }
+
+    header {
+      background-color: var(--verde-principal);
+      color: var(--blanco);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      text-align: center;
+    }
+
+    .logo {
+      width: 70px;
+      height: auto;
+      border-radius: 50%;
+      position: absolute;
+      right: 2rem;
+    }
+    
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--marron);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      position: absolute;
+      left: 2rem;
+    }
+
+    nav {
+      background-color: var(--verde-claro);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--marron);
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--verde-principal);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      padding: 3rem 1rem;
+      animation: fadeIn 0.8s ease;
+    }
+    
+    section:nth-child(even) {
+      background-color: rgba(167, 227, 159, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--verde-principal);
+      margin-bottom: 2rem;
+    }
+    
+    /* Carrusel */
+    .compact-carousel {
+    position: relative;
+    max-width: 600px; /* Más pequeño que antes */
+    margin: 1.5rem auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .compact-carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 250px; /* Altura fija más pequeña */
+  }
+  
+  .compact-carousel-item {
+    min-width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .compact-carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  /* Efecto zoom al pasar el mouse */
+  .compact-carousel-item:hover img {
+    transform: scale(1.1);
+  }
+  
+  .compact-carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  .compact-carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  
+  .compact-carousel-control {
+    background: rgba(170, 243, 161, 0.7);
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 10;
+    border-radius: 50%;
+    margin: 0 0.5rem;
+  }
+  
+  .compact-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+  
+  .compact-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--verde-principal);
+    margin: 0 4px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .compact-indicator.active {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+    /* Tabla */
+    .modern-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 2rem 0;
+      background: rgb(214, 244, 208);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .modern-table th {
+      background-color: var(--verde-principal);
+      color: rgb(15, 3, 3);
+      padding: 1.2rem;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    
+    .modern-table td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--gris);
+      transition: all 0.3s ease;
+    }
+    
+    .modern-table tr:hover td {
+      background-color: rgba(167, 227, 159, 0.1);
+    }
+    
+    .table-img-container {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .table-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .table-img-container:hover {
+      transform: scale(1.5);
+      z-index: 10;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Mapa */
+    .map-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--verde-principal);
+      color: rgb(11, 0, 0);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      text-align: left;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: #130101;
+    }
+
+    .footer-col p, .footer-col a {
+      font-size: 0.95rem;
+      color: #090000;
+      text-decoration: none;
+    }
+
+    .subir {
+      display: inline-block;
+      margin-top: 1rem;
+      background-color: #000000;
+      padding: 0.5rem 1rem;
+      color: #006400;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .subir:hover {
+      background-color: var(--verde-principal);
+      color: white;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0;
+      }
+      
+      nav.active {
+        max-height: 500px;
+        padding: 1rem;
+      }
+      
+      nav a {
+        padding: 0.8rem;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .logo {
+        position: static;
+        margin-top: 1rem;
+      }
+      
+      header {
+        flex-direction: column;
+        padding-bottom: 1rem;
+      }
+      
+      header h1 {
+        margin-bottom: 1rem;
+      }
+    }
+    
+    /* Animaciones */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    img{
+        width: 100px;
+        height: 80px;
+        overflow: hidden;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+   .contenedor-imagenes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    left: 0;
+    top: 0;
+   }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button class="menu-toggle">☰</button>
+    <h1>Composta Viva</h1>
+    <img src="Imagen de WhatsApp 2025-06-25 a las 19.25.34_7edfda8f.jpg" alt="Logo Composta Viva" class="logo">
+  </header>
+
+
+
+
+
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section id="inicio" class="fade-in">
+    <h2>¿Qué es la composta?</h2>
+    <p>La composta es un proceso natural mediante el cual los residuos orgánicos, como restos de comida y materiales vegetales, se descomponen en un abono rico en nutrientes. Este abono mejora la calidad del suelo y ayuda a reducir la basura doméstica.</p>
+    <div class="contenedor-imagenes">
+    <img src="descarga (1).jpeg" alt="Proceso de composta">
+    <img src="descarga.jpeg" alt="Proceso de composta">
+    <img src="Anti Bug, pesticidas botellas ilustración vectorial _ Vector Premium.jpeg" alt="Proceso de composta">
+    </div>
+
+
+  <section id="beneficios" class="fade-in delay-1">
+    <h2>Beneficios de la Composta</h2>
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th>Beneficio</th>
+          <th>Descripción</th>
+          <th>Imagen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reduce residuos</td>
+          <td>Disminuye la cantidad de basura en casa.</td>
+          <td>
+            <div class="table-img-container">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.32_4808274c.jpg" class="table-img" alt="Reduce residuos">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Enriquece el suelo</td>
+          <td>Mejora la calidad del suelo con nutrientes.</td>
+          <td>
+            <div class="table-img-container">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.31_b4e8d503.jpg" class="table-img" alt="Enriquece el suelo">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Ecoamigable</td>
+          <td>Contribuye al cuidado del medio ambiente.</td>
+          <td>
+            <div class="table-img-container">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.31_aa82a1cf.jpg" class="table-img" alt="Ecoamigable">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Mejora el medio ambiente</td>
+          <td>Contribuye al cuidado del medio ambiente.</td>
+          <td>
+            <div class="table-img-container">
+              <img src="IMG-20250626-WA0004.jpg" class="table-img" alt="Mejora el medio ambiente">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Oxígeno</td>
+          <td>Es vital para el proceso de compostaje aeróbico.</td>
+          <td>
+            <div class="table-img-container">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.30_d4df2348.jpg" class="table-img" alt="Oxígeno">
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+   <div class="compact-carousel">
+  <div class="compact-carousel-inner">
+    <div class="compact-carousel-item active">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.22_d36ca451.jpg" alt="Proceso de composta">
+      <div class="compact-carousel-caption">Proceso $100</div>
+    </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.23_6c818208.jpg" alt="Composta natural">
+      <div class="compact-carousel-caption">Resultado final $</div>
+    </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.24_e4a1ac17.jpg" alt="Uso en jardín">
+      <div class="compact-carousel-caption">Aplicación en jardinería $80</div>
+    </div>
+    <!-- Añade más imágenes aquí -->
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.24_eaeac004.jpg" alt="Beneficios ecológicos">
+      <div class="compact-carousel-caption">$250</div>
+    </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.26_ae7b6d66.jpg" alt="Impacto ambiental">
+      <div class="compact-carousel-caption">$50</div>
+    </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.30_fd7c87f5.jpg" alt="Oxigenación">
+      <div class="compact-carousel-caption">$90</div>
+    </div>
+  </div>
+  <div class="compact-carousel-controls">
+    <button class="compact-carousel-control prev">❮</button>
+    <button class="compact-carousel-control next">❯</button>
+  </div>
+  <div class="compact-carousel-indicators">
+    <span class="compact-indicator active"></span>
+    <span class="compact-indicator"></span>
+    <span class="compact-indicator"></span>
+    <!-- Añade más indicadores según las imágenes adicionales -->
+    <span class="compact-indicator"></span>
+    <span class="compact-indicator"></span>
+    <span class="compact-indicator"></span>
+  </div>
+</div>
+
+  <section id="contacto" class="fade-in delay-2">
+    <h2>Ubicación</h2>
+    <div class="map-container">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.381680061291!2d-100.13983772412058!3d19.30836488189946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d3219a5f9d0a6f%3A0x3e9a1efef99b4d1e!2sDonato%20Guerra%2C%20M%C3%A9x.!5e0!3m2!1ses!2smx!4v1719280000000!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+  <footer class="fade-in delay-3">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>sammm</h4>
+        <p>Proyectos Escolares para Ecotecnología Donato Guerra</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces útiles</h4>
+        <p><a href="#inicio">Inicio</a></p>
+        <p><a href="#beneficios">Beneficios</a></p>
+        <p><a href="#contacto">Contacto</a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>Email: Samiramispenalopes@gmail.com</p>
+        <p>Tel: 5551905928</p>
+      </div>
+      <div class="footer-col">
+        <h4>Síguenos</h4>
+        <p><a href="https://www.instagram.com/myb_samm" target="_blank">📷 Instagram</a></p>
+        <p><a href="https://www.facebook.com/share/19Yfu4iuJT/?mibextid=wwXIfr" target="_blank">📘 Facebook</a></p>
+      </div>
+    </div>
+    <p>@samm. Todos los derechos reservados 2025</p>
+    <a href="#inicio" class="subir">↑ Subir</a>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Carrusel Compacto
+    const compactCarouselInner = document.querySelector('.compact-carousel-inner');
+    const compactItems = document.querySelectorAll('.compact-carousel-item');
+    const compactIndicators = document.querySelectorAll('.compact-indicator');
+    let compactCurrentIndex = 0;
+    let autoRotateInterval;
+    
+    function updateCompactCarousel() {
+      compactCarouselInner.style.transform = `translateX(-${compactCurrentIndex * 100}%)`;
+      
+      compactIndicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === compactCurrentIndex);
+      });
+    }
+    
+    function startAutoRotate() {
+      autoRotateInterval = setInterval(() => {
+        compactCurrentIndex = (compactCurrentIndex + 1) % compactItems.length;
+        updateCompactCarousel();
+      }, 5000);
+    }
+    
+    function resetAutoRotate() {
+      clearInterval(autoRotateInterval);
+      startAutoRotate();
+    }
+    
+    document.querySelector('.compact-carousel .next').addEventListener('click', () => {
+      compactCurrentIndex = (compactCurrentIndex + 1) % compactItems.length;
+      updateCompactCarousel();
+      resetAutoRotate();
+    });
+    
+    document.querySelector('.compact-carousel .prev').addEventListener('click', () => {
+      compactCurrentIndex = (compactCurrentIndex - 1 + compactItems.length) % compactItems.length;
+      updateCompactCarousel();
+      resetAutoRotate();
+    });
+    
+    compactIndicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        compactCurrentIndex = index;
+        updateCompactCarousel();
+        resetAutoRotate();
+      });
+    });
+    
+    // Iniciar auto-rotación
+    startAutoRotate();
+    
+    // Pausar auto-rotación cuando el mouse está sobre el carrusel
+    document.querySelector('.compact-carousel').addEventListener('mouseenter', () => {
+      clearInterval(autoRotateInterval);
+    });
+    
+    // Reanudar auto-rotación cuando el mouse sale del carrusel
+    document.querySelector('.compact-carousel').addEventListener('mouseleave', () => {
+      startAutoRotate();
+    });
+  });
+</script>
+</body>
+</html>
