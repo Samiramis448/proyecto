@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Composta Viva</title>
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
     
@@ -15,22 +16,18 @@
       --negro: #2e2e2e;
       --marron: #6B4F3B;
     }
-    h1{
-        color: #7c6454;
-    }
 
     body {
-       background-image: url('fondo3.jpeg');
-       background-size: cover;
-       background-repeat: no-repeat ;
-       margin:0 ;
-       padding: 0%;
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
       background-color: var(--gris);
       color: var(--negro);
       line-height: 1.6;
+      background-image: url('fondo1.jpeg');
+background-size: cover;
+background-attachment: fixed;
+background-position: center;
     }
     
     h1, h2, h3, h4 {
@@ -53,15 +50,75 @@
       align-items: center;
       position: relative;
     }
+    .slogan-section {
+  background-color: var(--verde-claro);
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 2px solid var(--verde-principal);
+}
+
+.slogan-text {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--marron);
+  margin: 0;
+  background-color: #b7ecfe;
+}
+
 
     header h1 {
       margin: 0;
       font-size: 2.2rem;
       text-align: center;
     }
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  #main-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--verde-claro);
+    padding: 1rem;
+  }
+  
+  #main-nav.active {
+    display: flex;
+  }
+  
+  #main-nav a {
+    padding: 0.8rem;
+   
+  }
+}
 
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+  
+  #main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: var(--verde-claro);
+  }
+}
     .logo {
-      width: 70px;
+      width: 90px;
       height: auto;
       border-radius: 50%;
       position: absolute;
@@ -87,6 +144,9 @@
       gap: 2rem;
       padding: 1rem;
       flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     nav a {
@@ -188,7 +248,7 @@
   }
   
   .compact-carousel-control {
-    background: rgba(170, 243, 161, 0.7);
+    background: rgba(167, 227, 159, 0.7);
     color: white;
     border: none;
     padding: 0.3rem 0.6rem;
@@ -226,7 +286,7 @@
       border-collapse: separate;
       border-spacing: 0;
       margin: 2rem 0;
-      background: rgb(214, 244, 208);
+      background: white;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -234,7 +294,7 @@
     
     .modern-table th {
       background-color: var(--verde-principal);
-      color: rgb(15, 3, 3);
+      color: white;
       padding: 1.2rem;
       text-align: center;
       font-weight: 600;
@@ -353,6 +413,12 @@
         overflow: hidden;
         transition: max-height 0.3s ease;
         padding: 0;
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        background-color: var(--verde-claro);
+        z-index: 99;
       }
       
       nav.active {
@@ -394,49 +460,217 @@
     .delay-1 { animation-delay: 0.2s; }
     .delay-2 { animation-delay: 0.4s; }
     .delay-3 { animation-delay: 0.6s; }
-    img{
-        width: 100px;
-        height: 80px;
-        overflow: hidden;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-   .contenedor-imagenes{
+    /*
+      3 imagenes debajo del carrucel
+    */
+      .image-gallery {
     display: flex;
-    align-items: center;
     justify-content: center;
-    
-    left: 0;
-    top: 0;
-   }
+    gap: 20px;
+    margin: 2rem auto;
+    max-width: 800px;
+    flex-wrap: wrap;
+  }
+  
+  .gallery-item {
+    width: 150px; /* Tamaño pequeño inicial */
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-item:hover {
+    transform: scale(1.8); /* Factor de agrandamiento */
+    z-index: 10;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  /* Catálogo de Productos */
+  /* Catálogo de Productos */
+.product-catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.product-card {
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.1);
+}
+
+.product-info {
+  padding: 1.5rem;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name {
+  font-weight: 600;
+  color: var(--marron);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.product-description {
+  color: var(--negro);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+
+
+.product-price {
+  font-weight: 700;
+  color: var(--verde-principal);
+  font-size: 1.3rem;
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .product-catalog {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .product-catalog {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
   </style>
 </head>
 <body>
 
   <header>
-    <button class="menu-toggle">☰</button>
+    <button class="menu-toggle">  &#9776;</button>
     <h1>Composta Viva</h1>
     <img src="Imagen de WhatsApp 2025-06-25 a las 19.25.34_7edfda8f.jpg" alt="Logo Composta Viva" class="logo">
   </header>
+<section class="slogan-section fade-in">
+  <h2 class="slogan-text">🌿Cultiva vida, composta con conciencia🌱</h2>
+</section>
 
 
-
-
-
-  <nav>
+  <nav id="main-nav">
     <a href="#inicio">Inicio</a>
     <a href="#beneficios">Beneficios</a>
+    <a href="#productos">Productos</a>
     <a href="#contacto">Contacto</a>
   </nav>
 
   <section id="inicio" class="fade-in">
     <h2>¿Qué es la composta?</h2>
     <p>La composta es un proceso natural mediante el cual los residuos orgánicos, como restos de comida y materiales vegetales, se descomponen en un abono rico en nutrientes. Este abono mejora la calidad del suelo y ayuda a reducir la basura doméstica.</p>
-    <div class="contenedor-imagenes">
-    <img src="descarga (1).jpeg" alt="Proceso de composta">
-    <img src="descarga.jpeg" alt="Proceso de composta">
-    <img src="Anti Bug, pesticidas botellas ilustración vectorial _ Vector Premium.jpeg" alt="Proceso de composta">
+    
+   <div class="compact-carousel">
+  <div class="compact-carousel-inner">
+    <div class="compact-carousel-item active">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.22_d36ca451.jpg" alt="Proceso de composta">
+      <div class="compact-carousel-caption">Proceso de compostaje</div>
     </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.23_6c818208.jpg" alt="Composta natural">
+      <div class="compact-carousel-caption">Resultado final</div>
+    </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.24_e4a1ac17.jpg" alt="Uso en jardín">
+      <div class="compact-carousel-caption">Aplicación en jardinería</div>
+    </div>
+    <!-- Añade más imágenes aquí -->
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.24_eaeac004.jpg" alt="Beneficios ecológicos">
+      <div class="compact-carousel-caption">Beneficios ecológicos</div>
+    </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.31_aa82a1cf.jpg" alt="Impacto ambiental">
+      <div class="compact-carousel-caption">Impacto ambiental positivo</div>
+    </div>
+    <div class="compact-carousel-item">
+      <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.30_fd7c87f5.jpg" alt="Oxigenación">
+      <div class="compact-carousel-caption">Proceso de oxigenación</div>
+    </div>
+  </div>
+  <div class="compact-carousel-controls">
+    <button class="compact-carousel-control prev">❮</button>
+    <button class="compact-carousel-control next">❯</button>
+  </div>
+  <div class="compact-carousel-indicators">
+    <span class="compact-indicator active"></span>
+    <span class="compact-indicator"></span>
+    <span class="compact-indicator"></span>
+    <!-- Añade más indicadores según las imágenes adicionales -->
+    <span class="compact-indicator"></span>
+    <span class="compact-indicator"></span>
+    <span class="compact-indicator"></span>
+  </div>
+</div>
+
+</style>
+
+<!-- Coloca este código justo debajo de tu carrusel -->
+<div class="image-gallery">
+  <div class="gallery-item">
+    <img src="Anti Bug, pesticidas botellas ilustración vectorial _ Vector Premium.jpeg" alt="Imagen 1">
+    <div class="gallery-caption">Proceso de compostaje</div>
+  </div>
+  <div class="gallery-item">
+    <img src="descarga.jpeg" alt="Imagen 2">
+    <div class="gallery-caption">Resultado final</div>
+  </div>
+  <div class="gallery-item">
+    <img src="descarga (1).jpeg" alt="Imagen 3">
+    <div class="gallery-caption">Aplicación práctica</div>
+  </div>
+</div>
 
 
   <section id="beneficios" class="fade-in delay-1">
@@ -455,7 +689,7 @@
           <td>Disminuye la cantidad de basura en casa.</td>
           <td>
             <div class="table-img-container">
-              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.32_4808274c.jpg" class="table-img" alt="Reduce residuos">
+              <img src="IMG-20250626-WA0004.jpg" class="table-img" alt="Reduce residuos">
             </div>
           </td>
         </tr>
@@ -464,7 +698,7 @@
           <td>Mejora la calidad del suelo con nutrientes.</td>
           <td>
             <div class="table-img-container">
-              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.31_b4e8d503.jpg" class="table-img" alt="Enriquece el suelo">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.32_4808274c.jpg" class="table-img" alt="Enriquece el suelo">
             </div>
           </td>
         </tr>
@@ -473,7 +707,7 @@
           <td>Contribuye al cuidado del medio ambiente.</td>
           <td>
             <div class="table-img-container">
-              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.31_aa82a1cf.jpg" class="table-img" alt="Ecoamigable">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.31_b4e8d503.jpg" class="table-img" alt="Ecoamigable">
             </div>
           </td>
         </tr>
@@ -482,7 +716,7 @@
           <td>Contribuye al cuidado del medio ambiente.</td>
           <td>
             <div class="table-img-container">
-              <img src="IMG-20250626-WA0004.jpg" class="table-img" alt="Mejora el medio ambiente">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.30_fd7c87f5.jpg" class="table-img" alt="Mejora el medio ambiente">
             </div>
           </td>
         </tr>
@@ -491,58 +725,107 @@
           <td>Es vital para el proceso de compostaje aeróbico.</td>
           <td>
             <div class="table-img-container">
-              <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.30_d4df2348.jpg" class="table-img" alt="Oxígeno">
+              <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.22_d36ca451.jpg" class="table-img" alt="Oxígeno">
             </div>
           </td>
         </tr>
       </tbody>
     </table>
   </section>
+<!-- Reemplaza la sección de productos con este código: -->
+<section id="productos" class="fade-in delay-2">
+    <h2>Nuestros Productos</h2>
+    <div class="product-catalog">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="producto1.jpg" alt="Compostera Básica">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Ultra-Compost</h3>
+          <p class="product-description">Mejorador de suelo Granulado de 55kg</p>
+          <p class="product-price">$599.00 MXN</p>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="product-image">
+          <img src="producto2.jpg" alt="Kit de Compostaje">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Compost- Abono Orgánico</h3>
+          <p class="product-description">Fertilizante natural Orgánico para todo tipo de plantas 1kg</p>
+          <p class="product-price">$200.00 MXN</p>
+        </div>
+      </div>
+      
+      <div class="product-card">
+        <div class="product-image">
+          <img src="producto33.jpg" alt="Composta Orgánica">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">humus de Lombriz</h3>
+          <p class="product-description">Abono orgánico que mejora la germinación 2kg</p>
+          <p class="product-price">$449.00 MXN</p>
+        </div>
+      </div>
 
-   <div class="compact-carousel">
-  <div class="compact-carousel-inner">
-    <div class="compact-carousel-item active">
-      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.22_d36ca451.jpg" alt="Proceso de composta">
-      <div class="compact-carousel-caption">Proceso $100</div>
-    </div>
-    <div class="compact-carousel-item">
-      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.23_6c818208.jpg" alt="Composta natural">
-      <div class="compact-carousel-caption">Resultado final $</div>
-    </div>
-    <div class="compact-carousel-item">
-      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.24_e4a1ac17.jpg" alt="Uso en jardín">
-      <div class="compact-carousel-caption">Aplicación en jardinería $80</div>
-    </div>
-    <!-- Añade más imágenes aquí -->
-    <div class="compact-carousel-item">
-      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.24_eaeac004.jpg" alt="Beneficios ecológicos">
-      <div class="compact-carousel-caption">$250</div>
-    </div>
-    <div class="compact-carousel-item">
-      <img src="Imagen de WhatsApp 2025-06-25 a las 19.06.26_ae7b6d66.jpg" alt="Impacto ambiental">
-      <div class="compact-carousel-caption">$50</div>
-    </div>
-    <div class="compact-carousel-item">
-      <img src="Imagen de WhatsApp 2025-06-25 a las 19.31.30_fd7c87f5.jpg" alt="Oxigenación">
-      <div class="compact-carousel-caption">$90</div>
-    </div>
-  </div>
-  <div class="compact-carousel-controls">
-    <button class="compact-carousel-control prev">❮</button>
-    <button class="compact-carousel-control next">❯</button>
-  </div>
-  <div class="compact-carousel-indicators">
-    <span class="compact-indicator active"></span>
-    <span class="compact-indicator"></span>
-    <span class="compact-indicator"></span>
-    <!-- Añade más indicadores según las imágenes adicionales -->
-    <span class="compact-indicator"></span>
-    <span class="compact-indicator"></span>
-    <span class="compact-indicator"></span>
-  </div>
-</div>
+      <div class="product-card">
+        <div class="product-image">
+          <img src="producto4.jpg" alt="Composta Orgánica">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Tierra</h3>
+          <p class="product-description">Abono orgánico que mejora la germinación 2kg</p>
+          <p class="product-price">$200.00 MXN</p>
+        </div>
+      </div>
 
-  <section id="contacto" class="fade-in delay-2">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="producto5.jpg" alt="Composta Orgánica">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Natur Abono</h3>
+          <p class="product-description">Natur Abono 1 kg Fertilizante Orgánico para Suelo</p>
+          <p class="product-price">$235.00 MXN</p>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="producto6.jpg" alt="Composta Orgánica">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Natur Abono</h3>
+          <p class="product-description">Natur Abono 1 kg Fertilizante Orgánico para Suelo</p>
+          <p class="product-price">$235.00 MXN</p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section id="contacto" class="fade-in delay-2">
+  <h2>Regístrate para más información</h2>
+  <form id="contactForm" style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <label for="nombre" style="display:block; margin-bottom: 0.5rem;">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:5px; border:1px solid #ccc;">
+
+    <label for="correo" style="display:block; margin-bottom: 0.5rem;">Correo electrónico:</label>
+    <input type="email" id="correo" name="correo" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:5px; border:1px solid #ccc;">
+
+    <label for="telefono" style="display:block; margin-bottom: 0.5rem;">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:5px; border:1px solid #ccc;">
+
+    <button type="submit" style="background-color: var(--verde-principal); color:white; padding:0.7rem 1.5rem; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">Enviar</button>
+
+    <p id="mensaje-exito" style="display:none; color:green; font-weight:bold; margin-top:1rem;">✅ Datos registrados exitosamente</p>
+  </form>
+</section>
+
+
+
+
+  <section id="ubicación" class="fade-in delay-2">
     <h2>Ubicación</h2>
     <div class="map-container">
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.381680061291!2d-100.13983772412058!3d19.30836488189946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d3219a5f9d0a6f%3A0x3e9a1efef99b4d1e!2sDonato%20Guerra%2C%20M%C3%A9x.!5e0!3m2!1ses!2smx!4v1719280000000!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
@@ -558,17 +841,20 @@
         <h4>Enlaces útiles</h4>
         <p><a href="#inicio">Inicio</a></p>
         <p><a href="#beneficios">Beneficios</a></p>
+        <p><a href="#productos">Productos</a></p>
         <p><a href="#contacto">Contacto</a></p>
       </div>
       <div class="footer-col">
         <h4>Contacto</h4>
-        <p>Email: Samiramispenalopes@gmail.com</p>
-        <p>Tel: 5551905928</p>
+         <p><a href="mailto:penalopessamis@gmail.com">penalopessamis@gmail.com </a></p>
+          <p><a href="tel:55 5190 5928">55 5190 5928 </a></p>
       </div>
+
       <div class="footer-col">
         <h4>Síguenos</h4>
         <p><a href="https://www.instagram.com/myb_samm" target="_blank">📷 Instagram</a></p>
         <p><a href="https://www.facebook.com/share/19Yfu4iuJT/?mibextid=wwXIfr" target="_blank">📘 Facebook</a></p>
+          <p><a href="https://wa.me/5551905928" target="_blank">🪴WhatsApp</a></p>
       </div>
     </div>
     <p>@samm. Todos los derechos reservados 2025</p>
@@ -636,7 +922,31 @@
     document.querySelector('.compact-carousel').addEventListener('mouseleave', () => {
       startAutoRotate();
     });
+
+    // Menú Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+
+    menuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer clic en un enlace (para móviles)
+    if (window.innerWidth <= 768) {
+      document.querySelectorAll('#main-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+          mainNav.classList.remove('active');
+        });
+      });
+    }
+    // Formulario de contacto
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // evita que recargue la página
+  document.getElementById('mensaje-exito').style.display = 'block';
+  this.reset(); // opcional: limpia los campos después
+});
+
   });
 </script>
 </body>
-</html>
+</html> 
